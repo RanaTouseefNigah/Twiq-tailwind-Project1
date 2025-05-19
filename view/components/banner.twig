@@ -1,0 +1,75 @@
+<div
+	class="relative overflow-hidden rounded-2xl max-w-screen-xl mx-auto mt-10 bg-white" style="height: 360px;">
+	<!-- Slides Container -->
+	<div id="slider" class="flex transition-transform duration-500 ease-in-out h-full">
+		<div class="w-full flex flex-col md:flex-row items-center justify-between p-8 shrink-0 bg-cover bg-center relative" style="background-image: url('https://om.arganicnatural.com/cdn/shop/files/002-desktop-en.png?v=1727524395&width=1500');"></div>
+		<div class="w-full flex flex-col md:flex-row items-center justify-between p-8 shrink-0 bg-cover bg-center relative" style="background-image: url('https://om.arganicnatural.com/cdn/shop/files/004-desktop-en.png?v=1727524365&width=1500');"></div>
+		<div class="w-full flex flex-col md:flex-row items-center justify-between p-8 shrink-0 bg-cover bg-center relative" style="background-image: url('https://om.arganicnatural.com/cdn/shop/files/005-desktop-en.png?v=1727524395&width=1500');"></div>
+	</div>
+
+	<!-- Arrows -->
+	<button onclick="changeSlide(-1)" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white w-10 h-10 rounded-full shadow flex items-center justify-center text-xl hover:bg-gray-100 transition-colors">&#10094;</button>
+	<button onclick="changeSlide(1)" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white w-10 h-10 rounded-full shadow flex items-center justify-center text-xl hover:bg-gray-100 transition-colors">&#10095;</button>
+
+	<!-- Bullets -->
+	<div id="dots" class="flex justify-center space-x-2 absolute bottom-4 left-0 right-0"></div>
+</div>
+
+<script>
+	const slider = document.getElementById("slider");
+const totalSlides = slider.children.length;
+const dotsContainer = document.getElementById("dots");
+let currentIndex = 0;
+let slideInterval;
+
+function updateSlider() {
+slider.style.transform = `translateX(-${
+currentIndex * 100
+}%)`;
+updateDots();
+}
+
+function changeSlide(dir) {
+currentIndex = (currentIndex + dir + totalSlides) % totalSlides;
+updateSlider();
+resetInterval();
+}
+
+function goToSlide(index) {
+currentIndex = index;
+updateSlider();
+resetInterval();
+}
+
+function updateDots() {
+dotsContainer.innerHTML = "";
+for (let i = 0; i < totalSlides; i++) {
+const dot = document.createElement("span");
+dot.className = `w-3 h-3 rounded-full ${
+i === currentIndex ? 'bg-black' : 'bg-gray-400'
+} cursor-pointer transition-colors`;
+dot.onclick = () => goToSlide(i);
+dotsContainer.appendChild(dot);
+}
+}
+
+function startInterval() {
+slideInterval = setInterval(() => {
+currentIndex = (currentIndex + 1) % totalSlides;
+updateSlider();
+}, 5000); // Change slide every 5 seconds
+}
+
+function resetInterval() {
+clearInterval(slideInterval);
+startInterval();
+}
+
+// Initialize
+updateSlider();
+startInterval();
+
+// Pause on hover
+slider.parentElement.addEventListener('mouseenter', () => clearInterval(slideInterval));
+slider.parentElement.addEventListener('mouseleave', startInterval);
+</script>

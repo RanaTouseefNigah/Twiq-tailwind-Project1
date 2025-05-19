@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<link rel="stylesheet" href="/assets/css/style.css">
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body>
+		{% include 'partials/header.twig' %}
+		{% include "components/banner.twig" %}
+		{% block content %}
+			{% include "components/products-1.twig" %}
+			{% include "components/products-2.twig" %}
+			{% include "components/collection.twig" %}
+			{% include "components/products-3.twig" %}
+		{% endblock %}
+		{% include 'partials/footer.twig' %}
+	</body>
+</html>

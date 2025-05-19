@@ -1,0 +1,18 @@
+{
+  "name": "kushk-theme",
+  "version": "1.0.0",
+  "scripts": {
+    "build-css": "tailwindcss -i assets/css/tailwind.css -o assets/css/style.css --watch"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2"
+  },
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^4.1.5"
+  }
+}
